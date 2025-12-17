@@ -18,12 +18,13 @@
         AI Buddy
       </div>
       <nav>
-        <a href="../../../Prototype_Homepage.html">Home</a>
+        <a href="../../../AIBuddy_Homepage.php">Home</a>
         <a href="index.php" style="color:var(--accent);">Chatbot</a>
-        <a href="../../../Prototype_EmotionTracker.html">Emotion Tracker</a>
-        <a href="../../../Prototype_Focus.html">Focus</a>
-        <a href="../../../Prototype_Profile.html">Profile</a>
-        <a href="../../../Prototype_About.html">About</a>
+        <a href="../../../AIBuddy_EmotionTracker.php">Emotion Tracker</a>
+        <a href="../../../AIBuddy_Trial.php">Trial</a>
+        <a href="../../../AIBuddy_Profile.php">Profile</a>
+        <a href="../../../AIBuddy_About.php">About</a>
+        <a href="../../../AIBuddy_Contact.php">Contact</a>
       </nav>
       <div class="header-toggles">
         <button id="tools-toggle" class="mobile-toggle-btn" aria-label="Toggle tools">
@@ -43,26 +44,9 @@
         <i class="fa-solid fa-plus"></i> Start a new chat
       </button>
 
-        <div class="persona-list">
-                <h4>Choose Persona</h4>
-                
-                <div class="persona-card active" data-id="1" onclick="selectPersona(this)">
-                <span class="icon">👯</span>
-                <div class="info"><strong>Bestie</strong><span>Always by your side</span></div>
-                </div>
-                
-                <div class="persona-card" data-id="2" onclick="selectPersona(this)">
-                <span class="icon">🧠</span>
-                <div class="info"><strong>Therapist</strong><span>Professional CBT support</span></div>
-                <i class="fa-solid fa-lock premium-lock"></i>
-                </div>
-
-                <div class="persona-card" data-id="3" onclick="selectPersona(this)">
-                <span class="icon">🚀</span>
-                <div class="info"><strong>Career Coach</strong><span>Guidance for future</span></div>
-                <i class="fa-solid fa-lock premium-lock"></i>
-                </div>
-                
+        <div class="persona-list" id="persona-list-container">
+          <h4>Choose Persona</h4>
+          <p style="text-align:center; color:#888;">Loading...</p> 
         </div>
 
         <div class="chat-history-list">
@@ -114,12 +98,8 @@
     <aside class="sidebar-right" id="sidebar-right">
       <div class="widget-box">
         <h4>Topic Suggestions</h4>
-        <div class="topic-pills">
-          <span class="pill" data-id="1" onclick="selectTopic(this)">Today's mood</span>
-          <span class="pill" data-id="2" onclick="selectTopic(this)">Study pressure</span>
-          <span class="pill" data-id="3" onclick="selectTopic(this)">Work motivation</span>
-          <span class="pill" data-id="4" onclick="selectTopic(this)">Relationships</span>
-          <span class="pill" data-id="5" onclick="selectTopic(this)">Ways to relax</span>
+        <div class="topic-pills" id="topic-list-container">
+            <span style="font-size:0.8rem; color:#888;">Loading topics...</span>
         </div>
       </div>
 
@@ -130,7 +110,7 @@
           Breathe in...
         </div>
         <p style="margin-top:15px;">Or listen to a relaxation audio (Premium):</p>
-        <a href="../../../Prototype_Focus.html" class="premium-audio-link">
+        <a href="../../../AIBuddy_Trial.php" class="premium-audio-link">
           <i class="fa-solid fa-headphones"></i> Open Brainwave Audio
         </a>
       </div>

@@ -40,7 +40,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $path; ?>../../../Prototype_Homepage.html" target="_blank">
+                        <a class="nav-link" href="<?php echo $path; ?>../../../AIBuddy_Homepage.html" target="_blank">
                             <i class="fas fa-external-link-alt"></i> View Website
                         </a>
                     </li>

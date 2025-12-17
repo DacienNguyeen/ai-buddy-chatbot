@@ -205,5 +205,18 @@ class ChatController {
         // Trả về đường dẫn web (để lưu vào DB)
         return 'public/uploads/' . $fileName;
     }
+
+    // --- THÊM MỚI: Lấy danh sách Persona ---
+    public function getPersonas() {
+        // Chỉ lấy các cột cần thiết để hiển thị
+        $stmt = $this->pdo->query("SELECT PersonaID, PersonaName, Description, Icon, IsPremium FROM Personas");
+        return $stmt->fetchAll();
+    }
+
+    // --- THÊM MỚI: Lấy danh sách Topic ---
+    public function getTopics() {
+        $stmt = $this->pdo->query("SELECT TopicID, TopicName FROM Topics");
+        return $stmt->fetchAll();
+    }
 }
 ?>

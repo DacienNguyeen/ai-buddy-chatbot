@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     setupVoiceFeatures();
     setupImageUpload();
+    loadPersonas(); 
+    loadTopics();
 });
 
 function setupUIToggles() {
@@ -483,3 +485,59 @@ function showTypingIndicator() {
 }
 function removeTypingIndicator(id) { const el=document.getElementById(id); if(el) el.remove(); }
 function scrollToBottom() { const cw = document.getElementById('chat-window'); cw.scrollTop = cw.scrollHeight; }
+
+// --- DYNAMIC DATA LOADING ---
+
+function loadPersonas() {
+    fetch(API_BASE + 'get_personas.php')
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 200) {
+                const container = document.getElementById('persona-list-container');
+                // Giữ lại tiêu đề h4
+                container.innerHTML = '<h4>Choose Persona</h4>'; 
+                
+                data.data.forEach(p => {
+                    // Kiểm tra xem có phải persona đang chọn không
+                    const isActive = (p.PersonaID == currentPersonaId) ? 'active' : '';
+                    
+                    // Xử lý icon khóa nếu là Premium
+                    const lockIcon = (p.IsPremium == 1) ? '<i class="fa-solid fa-lock premium-lock"></i>' : '';
+                    
+                    const html = `
+                        <div class="persona-card ${isActive}" data-id="${p.PersonaID}" onclick="selectPersona(this)">
+                            <span class="icon">${p.Icon}</span>
+                            <div class="info">
+                                <strong>${p.PersonaName}</strong>
+                                <span>${p.Description}</span>
+                            </div>
+                            ${lockIcon}
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+            }
+        })
+        .catch(err => console.error("Load Personas Error:", err));
+}
+
+function loadTopics() {
+    fetch(API_BASE + 'get_topics.php')
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 200) {
+                const container = document.getElementById('topic-list-container');
+                container.innerHTML = ''; // Xóa chữ loading
+                
+                data.data.forEach(t => {
+                    const html = `
+                        <span class="pill" data-id="${t.TopicID}" onclick="selectTopic(this)">
+                            ${t.TopicName}
+                        </span>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+            }
+        })
+        .catch(err => console.error("Load Topics Error:", err));
+}
